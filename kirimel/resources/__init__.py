@@ -424,6 +424,46 @@ class Workflows(ResourceClient):
         return self._http_client.get(f"workflows/{workflow_id}/data")
 
 
+class Webhooks(ResourceClient):
+    """Webhooks resource client"""
+
+    def list(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """List all webhooks"""
+        return self._http_client.get("webhooks", params or {})
+
+    def get(self, webhook_id: int) -> Dict[str, Any]:
+        """Get single webhook"""
+        return self._http_client.get(f"webhooks/{webhook_id}")
+
+    def create(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Create webhook"""
+        return self._http_client.post("webhooks", data)
+
+    def update(self, webhook_id: int, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Update webhook"""
+        return self._http_client.post(f"webhooks/{webhook_id}", data)
+
+    def delete(self, webhook_id: int) -> Dict[str, Any]:
+        """Delete webhook"""
+        return self._http_client.delete(f"webhooks/{webhook_id}")
+
+    def test(self, webhook_id: int) -> Dict[str, Any]:
+        """Test webhook"""
+        return self._http_client.post(f"webhooks/{webhook_id}/test")
+
+    def logs(self, webhook_id: int) -> Dict[str, Any]:
+        """Get webhook logs"""
+        return self._http_client.get(f"webhooks/{webhook_id}/logs")
+
+    def events(self) -> Dict[str, Any]:
+        """Get supported webhook events"""
+        return self._http_client.get("webhooks/events")
+
+    def regenerate_secret(self, webhook_id: int) -> Dict[str, Any]:
+        """Regenerate webhook secret"""
+        return self._http_client.post(f"webhooks/{webhook_id}/secret/regenerate")
+
+
 __all__ = [
     "Campaigns",
     "Subscribers",
@@ -434,4 +474,5 @@ __all__ = [
     "Conversions",
     "LandingPages",
     "Workflows",
+    "Webhooks",
 ]

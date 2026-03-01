@@ -13,6 +13,7 @@ from .resources import (
     Conversions,
     LandingPages,
     Workflows,
+    Webhooks,
 )
 
 
@@ -57,6 +58,7 @@ class KiriMel:
         self._conversions: Optional[Conversions] = None
         self._landing_pages: Optional[LandingPages] = None
         self._workflows: Optional[Workflows] = None
+        self._webhooks: Optional[Webhooks] = None
 
     @property
     def campaigns(self) -> Campaigns:
@@ -120,3 +122,10 @@ class KiriMel:
         if self._workflows is None:
             self._workflows = Workflows(self._http_client)
         return self._workflows
+
+    @property
+    def webhooks(self) -> Webhooks:
+        """Get webhooks resource client"""
+        if self._webhooks is None:
+            self._webhooks = Webhooks(self._http_client)
+        return self._webhooks
