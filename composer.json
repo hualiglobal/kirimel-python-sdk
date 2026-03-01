@@ -1,0 +1,42 @@
+{
+    "name": "kirimel/php-sdk",
+    "description": "Official KiriMel PHP SDK",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "KiriMel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KiriMel\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html coverage"
+    },
+    "keywords": [
+        "kirimel",
+        "email",
+        "marketing",
+        "sdk",
+        "api"
+    ],
+    "authors": [
+        {
+            "name": "KiriMel",
+            "email": "support@kirimel.com"
+        }
+    ],
+    "homepage": "https://github.com/kirimel/kirimel-php-sdk"
+}
