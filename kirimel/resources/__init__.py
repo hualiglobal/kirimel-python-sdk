@@ -2,7 +2,7 @@
 Resource clients for KiriMel API
 """
 from typing import Optional, Dict, Any, List
-from .http_client import HttpClient
+from ..http_client import HttpClient
 
 
 class ResourceClient:
