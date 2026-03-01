@@ -24,6 +24,7 @@ class Client
     private ?Resources\Conversions $conversions = null;
     private ?Resources\LandingPages $landingPages = null;
     private ?Resources\Workflows $workflows = null;
+    private ?Resources\Webhooks $webhooks = null;
 
     /**
      * Create a new API client
@@ -154,6 +155,17 @@ class Client
             $this->workflows = new Resources\Workflows($this->httpClient);
         }
         return $this->workflows;
+    }
+
+    /**
+     * Get webhooks resource client
+     */
+    public function webhooks(): Resources\Webhooks
+    {
+        if ($this->webhooks === null) {
+            $this->webhooks = new Resources\Webhooks($this->httpClient);
+        }
+        return $this->webhooks;
     }
 
     /**
