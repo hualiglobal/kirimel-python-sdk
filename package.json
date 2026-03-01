@@ -1,0 +1,52 @@
+{
+  "name": "@kirimel/node-sdk",
+  "version": "0.1.0",
+  "description": "Official KiriMel Node.js SDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/**/*.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "kirimel",
+    "email",
+    "marketing",
+    "sdk",
+    "api"
+  ],
+  "author": "KiriMel <support@kirimel.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/kirimel/kirimel-node-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kirimel/kirimel-node-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/kirimel/kirimel-node-sdk/issues"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0",
+    "typescript": "^5.0",
+    "jest": "^29.0",
+    "@types/jest": "^29.0",
+    "ts-jest": "^29.0",
+    "eslint": "^8.0",
+    "@typescript-eslint/eslint-plugin": "^6.0",
+    "@typescript-eslint/parser": "^6.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
