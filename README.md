@@ -470,5 +470,5 @@ MIT License
 ## Support
 
 - Documentation: https://docs.kirimel.com
-- GitHub: https://github.com/kirimel/kirimel-python-sdk
-- Issues: https://github.com/kirimel/kirimel-python-sdk/issues
+- GitHub: https://github.com/hualiglobal/kirimel-python-sdk
+- Issues: https://github.com/hualiglobal/kirimel-python-sdk/issues
