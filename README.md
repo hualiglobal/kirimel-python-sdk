@@ -16,7 +16,7 @@ import kirimel
 # Initialize the client
 client = kirimel.KiriMel(
     api_key='sk_test_xxx',  # Or set KIRIMEL_API_KEY env variable
-    base_url='https://api.kirimel.com/v2',
+    base_url='https://kirimel.com/api',
     timeout=30,
     retries=3
 )

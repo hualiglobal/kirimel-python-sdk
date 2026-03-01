@@ -16,7 +16,7 @@ class HttpClient:
     def __init__(
         self,
         api_key: Optional[str] = None,
-        base_url: str = "https://api.kirimel.com/v2",
+        base_url: str = "https://kirimel.com/api",
         timeout: int = 30,
         retries: int = 3,
     ):

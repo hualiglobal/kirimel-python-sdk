@@ -29,7 +29,7 @@ class KiriMel:
     def __init__(
         self,
         api_key: Optional[str] = None,
-        base_url: str = "https://api.kirimel.com/v2",
+        base_url: str = "https://kirimel.com/api",
         timeout: int = 30,
         retries: int = 3,
     ):
@@ -38,7 +38,7 @@ class KiriMel:
 
         Args:
             api_key: API key (or use KIRIMEL_API_KEY env variable)
-            base_url: Base URL (default: https://api.kirimel.com/v2)
+            base_url: Base URL (default: https://kirimel.com/api)
             timeout: Request timeout in seconds (default: 30)
             retries: Number of retries (default: 3)
         """
