@@ -5,7 +5,7 @@ Official PHP SDK for KiriMel Email Marketing API.
 ## Installation
 
 ```bash
-composer require kirimel/php-sdk
+composer require hualiglobal/kirimel-php-sdk
 ```
 
 ## Quick Start
@@ -20,7 +20,7 @@ use KiriMel\Client;
 // Initialize the client
 $client = new Client([
     'api_key' => 'sk_test_xxx', // Or set KIRIMEL_API_KEY env variable
-    'base_url' => 'https://api.kirimel.com/v2',
+    'base_url' => 'https://kirimel.com',
     'timeout' => 30,
     'retries' => 3
 ]);
@@ -495,5 +495,5 @@ MIT License
 ## Support
 
 - Documentation: https://docs.kirimel.com
-- GitHub: https://github.com/kirimel/kirimel-php-sdk
-- Issues: https://github.com/kirimel/kirimel-php-sdk/issues
+- GitHub: https://github.com/hualiglobal/kirimel-php-sdk
+- Issues: https://github.com/hualiglobal/kirimel-php-sdk/issues

@@ -30,7 +30,7 @@ class Client
      *
      * @param array $config Configuration options
      *   - api_key: API key (or use KIRIMEL_API_KEY env var)
-     *   - base_url: Base URL (default: https://api.kirimel.com/v2)
+     *   - base_url: Base URL (default: https://kirimel.com)
      *   - timeout: Request timeout in seconds (default: 30)
      *   - retries: Number of retries (default: 3)
      *   - logger: PSR-3 logger instance

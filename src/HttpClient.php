@@ -22,7 +22,7 @@ class HttpClient
 
     public function __construct(array $config = [])
     {
-        $this->baseUrl = rtrim($config['base_url'] ?? 'https://api.kirimel.com/v2', '/');
+        $this->baseUrl = rtrim($config['base_url'] ?? 'https://kirimel.com', '/');
         $this->apiKey = $config['api_key'] ?? $this->getEnvApiKey();
         $this->timeout = $config['timeout'] ?? 30;
         $this->retries = $config['retries'] ?? 3;
