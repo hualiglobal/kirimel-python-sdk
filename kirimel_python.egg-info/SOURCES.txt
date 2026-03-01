@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+kirimel/__init__.py
+kirimel/client.py
+kirimel/exceptions.py
+kirimel/http_client.py
+kirimel/resources/__init__.py
+kirimel_python.egg-info/PKG-INFO
+kirimel_python.egg-info/SOURCES.txt
+kirimel_python.egg-info/dependency_links.txt
+kirimel_python.egg-info/requires.txt
+kirimel_python.egg-info/top_level.txt
+tests/test_client.py
