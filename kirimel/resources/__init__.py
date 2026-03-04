@@ -67,13 +67,17 @@ class Subscribers(ResourceClient):
         """List subscribers for a list"""
         return self._http_client.get(f"lists/{list_id}/subscribers", params or {})
 
+    def list_all(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """List all subscribers"""
+        return self._http_client.get("subscribers", params or {})
+
     def get(self, subscriber_id: int) -> Dict[str, Any]:
         """Get single subscriber"""
         return self._http_client.get(f"subscribers/{subscriber_id}")
 
-    def create(self, list_id: int, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Add subscriber to a list"""
-        return self._http_client.post(f"lists/{list_id}/subscribers", data)
+    def create(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Add subscriber"""
+        return self._http_client.post("subscribers", data)
 
     def update(self, subscriber_id: int, data: Dict[str, Any]) -> Dict[str, Any]:
         """Update subscriber"""
@@ -81,7 +85,7 @@ class Subscribers(ResourceClient):
 
     def delete(self, subscriber_id: int) -> Dict[str, Any]:
         """Delete subscriber"""
-        return self._http_client.post(f"subscribers/{subscriber_id}/delete")
+        return self._http_client.delete(f"subscribers/{subscriber_id}")
 
     def unsubscribe(self, subscriber_id: int) -> Dict[str, Any]:
         """Unsubscribe subscriber"""
@@ -145,7 +149,7 @@ class Lists(ResourceClient):
 
     def delete(self, list_id: int) -> Dict[str, Any]:
         """Delete list"""
-        return self._http_client.post(f"lists/{list_id}/delete")
+        return self._http_client.delete(f"lists/{list_id}")
 
     def stats(self, list_id: int) -> Dict[str, Any]:
         """Get list statistics"""

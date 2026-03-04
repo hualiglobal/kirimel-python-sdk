@@ -99,11 +99,14 @@ stats = client.campaigns.stats(id)
 # List subscribers for a list
 subscribers = client.subscribers.list(list_id, limit=50)
 
+# List all subscribers
+all_subscribers = client.subscribers.list_all(limit=50)
+
 # Get single subscriber
 subscriber = client.subscribers.get(id)
 
-# Add subscriber to a list
-subscriber = client.subscribers.create(list_id, {
+# Add subscriber
+subscriber = client.subscribers.create({
     'email': 'user@example.com',
     'first_name': 'John',
     'last_name': 'Doe'

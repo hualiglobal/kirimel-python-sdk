@@ -1,13 +1,13 @@
 Metadata-Version: 2.4
 Name: kirimel-python
-Version: 0.1.3
+Version: 0.1.7
 Summary: Official KiriMel Python SDK
 Author-email: KiriMel <support@kirimel.com>
 License: MIT
-Project-URL: Homepage, https://github.com/kirimel/kirimel-python-sdk
-Project-URL: Documentation, https://docs.kirimel.com
-Project-URL: Repository, https://github.com/kirimel/kirimel-python-sdk
-Project-URL: Issues, https://github.com/kirimel/kirimel-python-sdk/issues
+Project-URL: Homepage, https://github.com/hualiglobal/kirimel-python-sdk
+Project-URL: Documentation, https://github.com/hualiglobal/kirimel-python-sdk
+Project-URL: Repository, https://github.com/hualiglobal/kirimel-python-sdk
+Project-URL: Issues, https://github.com/hualiglobal/kirimel-python-sdk/issues
 Keywords: kirimel,email,marketing,sdk,api
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
@@ -129,11 +129,14 @@ stats = client.campaigns.stats(id)
 # List subscribers for a list
 subscribers = client.subscribers.list(list_id, limit=50)
 
+# List all subscribers
+all_subscribers = client.subscribers.list_all(limit=50)
+
 # Get single subscriber
 subscriber = client.subscribers.get(id)
 
-# Add subscriber to a list
-subscriber = client.subscribers.create(list_id, {
+# Add subscriber
+subscriber = client.subscribers.create({
     'email': 'user@example.com',
     'first_name': 'John',
     'last_name': 'Doe'
