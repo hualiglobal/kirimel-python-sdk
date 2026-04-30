@@ -14,6 +14,7 @@ from .resources import (
     LandingPages,
     Workflows,
     Webhooks,
+    Email,
 )
 
 
@@ -59,6 +60,7 @@ class KiriMel:
         self._landing_pages: Optional[LandingPages] = None
         self._workflows: Optional[Workflows] = None
         self._webhooks: Optional[Webhooks] = None
+        self._email: Optional[Email] = None
 
     @property
     def campaigns(self) -> Campaigns:
@@ -129,3 +131,10 @@ class KiriMel:
         if self._webhooks is None:
             self._webhooks = Webhooks(self._http_client)
         return self._webhooks
+
+    @property
+    def email(self) -> Email:
+        """Get email resource client for transactional emails"""
+        if self._email is None:
+            self._email = Email(self._http_client)
+        return self._email

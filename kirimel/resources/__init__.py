@@ -468,6 +468,64 @@ class Webhooks(ResourceClient):
         return self._http_client.post(f"webhooks/{webhook_id}/secret/regenerate")
 
 
+class Email(ResourceClient):
+    """Email resource client for transactional emails"""
+
+    def send(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Send transactional email
+
+        Args:
+            data: Email data containing:
+                - to: str or list - Recipient email(s)
+                - subject: str - Email subject
+                - html: str - HTML content (optional)
+                - text: str - Plain text content (optional)
+                - from_name: str - From name (optional)
+                - reply_to: str - Reply-to address (optional)
+                - cc: str or list - CC recipients (optional)
+                - bcc: str or list - BCC recipients (optional)
+                - attachments: list - Attachments array (optional)
+                    - name: str - File name
+                    - content: str - Base64 encoded content
+
+        Returns:
+            Response with message_id and tracking_id
+        """
+        return self._http_client.post("email/send", data)
+
+    def quota(self) -> Dict[str, Any]:
+        """Get SES send quota
+
+        Returns:
+            Quota information:
+                - max_24_hour_send: int
+                - sent_last_24_hours: int
+                - remaining: int
+                - max_send_rate_per_second: float
+                - utilization_percent: float
+        """
+        return self._http_client.get("email/quota")
+
+    def verified_emails(self) -> Dict[str, Any]:
+        """Get verified emails
+
+        Returns:
+            List of verified email addresses
+        """
+        return self._http_client.get("email/verified")
+
+    def verify_email(self, email: str) -> Dict[str, Any]:
+        """Verify email address
+
+        Args:
+            email: Email address to verify
+
+        Returns:
+            Verification status
+        """
+        return self._http_client.post("email/verify", {"email": email})
+
+
 __all__ = [
     "Campaigns",
     "Subscribers",
@@ -479,4 +537,5 @@ __all__ = [
     "LandingPages",
     "Workflows",
     "Webhooks",
+    "Email",
 ]
