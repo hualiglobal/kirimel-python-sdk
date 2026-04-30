@@ -424,6 +424,57 @@ node_types = client.workflows.node_types()
 data = client.workflows.get_data(id)
 ```
 
+### Email (Transactional)
+
+Send transactional emails with attachment support:
+
+```python
+# Send transactional email
+result = client.email.send({
+    'to': 'user@example.com',
+    'subject': 'Welcome to our service!',
+    'html': '<h1>Welcome!</h1><p>Thanks for signing up.</p>',
+    'text': 'Welcome! Thanks for signing up.',
+    'from_name': 'My App',
+    'reply_to': 'support@example.com',
+    'cc': 'cc@example.com',
+    'bcc': ['bcc1@example.com', 'bcc2@example.com'],
+    'attachments': [
+        {
+            'name': 'invoice.pdf',
+            'content': base64.b64encode(open('/path/to/invoice.pdf', 'rb').read()).decode()
+        },
+        {
+            'name': 'report.csv',
+            'content': base64.b64encode(open('/path/to/report.csv', 'rb').read()).decode()
+        }
+    ]
+})
+
+# Response includes message_id and tracking_id
+print(f"Message ID: {result['message_id']}")
+print(f"Tracking ID: {result['tracking_id']}")
+
+# Send to multiple recipients
+result = client.email.send({
+    'to': ['user1@example.com', 'user2@example.com'],
+    'subject': 'Team update',
+    'html': '<p>Here is the latest update.</p>'
+})
+
+# Get SES send quota
+quota = client.email.quota()
+print(f"Remaining: {quota['remaining']}")
+print(f"Max 24h: {quota['max_24_hour_send']}")
+print(f"Utilization: {quota['utilization_percent']}%")
+
+# Get verified emails
+verified = client.email.verified_emails()
+
+# Verify a new email address
+result = client.email.verify_email('new@example.com')
+```
+
 ## Error Handling
 
 ```python
@@ -472,6 +523,6 @@ MIT License
 
 ## Support
 
-- Documentation: https://docs.kirimel.com
+- Documentation: https://kirimel.com/api-docs
 - GitHub: https://github.com/hualiglobal/kirimel-python-sdk
 - Issues: https://github.com/hualiglobal/kirimel-python-sdk/issues
