@@ -1,6 +1,7 @@
 """
 KiriMel Python SDK Client
 """
+
 import os
 from typing import Optional
 from .http_client import HttpClient

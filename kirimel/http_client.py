@@ -1,13 +1,19 @@
 """
 HTTP Client for KiriMel API
 """
+
 import os
 import time
 import logging
 from typing import Optional, Dict, Any, List
 import requests
 
-from .exceptions import ApiException, AuthenticationException, RateLimitException, ValidationException
+from .exceptions import (
+    ApiException,
+    AuthenticationException,
+    RateLimitException,
+    ValidationException,
+)
 
 
 class HttpClient:
@@ -53,6 +59,7 @@ class HttpClient:
         url = f"{self.base_url}/{path.lstrip('/')}"
         if params:
             import urllib.parse
+
             query_string = urllib.parse.urlencode(params)
             url = f"{url}?{query_string}"
         return url

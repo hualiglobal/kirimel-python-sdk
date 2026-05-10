@@ -1,4 +1,5 @@
 """Loyalty Points resource"""
+
 from typing import Dict, Any, Optional
 
 

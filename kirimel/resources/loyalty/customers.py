@@ -1,4 +1,5 @@
 """Loyalty Customers resource"""
+
 from typing import Dict, Any, Optional
 
 
@@ -44,7 +45,9 @@ class Customers:
         """
         return self._http.get(f"/api/loyalty/customers/{customer_id}")
 
-    def transactions(self, customer_id: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def transactions(
+        self, customer_id: str, params: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """
         Get customer transactions
 

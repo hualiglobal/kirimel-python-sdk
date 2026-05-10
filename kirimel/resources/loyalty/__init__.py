@@ -1,4 +1,5 @@
 """Loyalty API resources"""
+
 from .customers import Customers
 from .points import Points
 from .vouchers import Vouchers

@@ -3,6 +3,7 @@ KiriMel Python SDK
 
 Official Python SDK for KiriMel Email Marketing API.
 """
+
 from .client import KiriMel
 from .exceptions import (
     ApiException,

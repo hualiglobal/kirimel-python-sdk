@@ -1,6 +1,7 @@
 """
 Resource clients for KiriMel API
 """
+
 from typing import Optional, Dict, Any, List
 from ..http_client import HttpClient
 
@@ -45,7 +46,9 @@ class Campaigns(ResourceClient):
 
     def schedule(self, campaign_id: int, scheduled_at: str) -> Dict[str, Any]:
         """Schedule campaign"""
-        return self._http_client.post(f"campaigns/{campaign_id}/schedule", {"scheduled_at": scheduled_at})
+        return self._http_client.post(
+            f"campaigns/{campaign_id}/schedule", {"scheduled_at": scheduled_at}
+        )
 
     def pause(self, campaign_id: int) -> Dict[str, Any]:
         """Pause campaign"""
@@ -93,7 +96,9 @@ class Subscribers(ResourceClient):
 
     def bulk_unsubscribe(self, subscriber_ids: List[int]) -> Dict[str, Any]:
         """Bulk unsubscribe"""
-        return self._http_client.post("subscribers/bulk-unsubscribe", {"subscriber_ids": subscriber_ids})
+        return self._http_client.post(
+            "subscribers/bulk-unsubscribe", {"subscriber_ids": subscriber_ids}
+        )
 
     def bulk_delete(self, subscriber_ids: List[int]) -> Dict[str, Any]:
         """Bulk delete"""
@@ -181,9 +186,13 @@ class Segments(ResourceClient):
 
     def preview(self, list_id: int, conditions: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Preview segment (without saving)"""
-        return self._http_client.post(f"lists/{list_id}/segments/preview", {"conditions": conditions})
+        return self._http_client.post(
+            f"lists/{list_id}/segments/preview", {"conditions": conditions}
+        )
 
-    def subscribers(self, segment_id: int, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def subscribers(
+        self, segment_id: int, params: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """Get segment subscribers"""
         return self._http_client.get(f"segments/{segment_id}/subscribers", params or {})
 

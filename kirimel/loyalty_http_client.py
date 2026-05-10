@@ -1,6 +1,7 @@
 """
 Loyalty HTTP Client with HMAC SHA256 authentication
 """
+
 import os
 import time
 import hmac
@@ -59,6 +60,7 @@ class LoyaltyHttpClient:
         url = f"{self.base_url}/{path.lstrip('/')}"
         if params:
             import urllib.parse
+
             query_string = urllib.parse.urlencode(params)
             url = f"{url}?{query_string}"
         return url
@@ -115,9 +117,7 @@ class LoyaltyHttpClient:
         """Calculate HMAC SHA256 signature"""
         signing_string = f"{timestamp}.{payload}"
         signature = hmac.new(
-            self.client_secret.encode(),
-            signing_string.encode(),
-            hashlib.sha256
+            self.client_secret.encode(), signing_string.encode(), hashlib.sha256
         ).hexdigest()
         return signature
 

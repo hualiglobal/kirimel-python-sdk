@@ -27,7 +27,9 @@ class RateLimitException(ApiException):
 
     error_type = "rate_limit_error"
 
-    def __init__(self, message: str, status_code: int = None, errors: dict = None, retry_after: int = None):
+    def __init__(
+        self, message: str, status_code: int = None, errors: dict = None, retry_after: int = None
+    ):
         super().__init__(message, status_code, errors)
         self.retry_after = retry_after
 
