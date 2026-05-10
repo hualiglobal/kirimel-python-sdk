@@ -5,7 +5,7 @@ HTTP Client for KiriMel API
 import os
 import time
 import logging
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, cast
 import requests  # type: ignore
 
 from .exceptions import (
@@ -95,7 +95,7 @@ class HttpClient:
         if response.status_code >= 400:
             self._handle_error(response, url, attempt)
 
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     def _build_headers(self) -> Dict[str, str]:
         """Build request headers"""

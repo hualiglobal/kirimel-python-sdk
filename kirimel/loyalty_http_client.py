@@ -109,7 +109,7 @@ class LoyaltyHttpClient:
         if response.status_code >= 400:
             self._handle_error(response)
 
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     def _get_timestamp(self) -> str:
         """Get ISO 8601 timestamp in UTC"""
