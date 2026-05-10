@@ -1,6 +1,14 @@
 # KiriMel Python SDK
 
-Official Python SDK for KiriMel Email Marketing API.
+Official Python SDK for KiriMel Email Marketing API & Loyalty API.
+
+## Features
+
+- **Email API**: Manage campaigns, subscribers, lists, templates, forms, workflows & more
+- **Loyalty API**: Customer loyalty with points, vouchers, tiers, and wallet management
+- **Unified Client**: Single SDK for both APIs with different authentication methods
+- **Type Hints**: Full type annotations for Python 3.8+
+- **Retry Logic**: Built-in exponential backoff for failed requests
 
 ## Installation
 
@@ -473,6 +481,148 @@ verified = client.email.verified_emails()
 
 # Verify a new email address
 result = client.email.verify_email('new@example.com')
+```
+
+## Loyalty API
+
+The Loyalty API uses HMAC SHA256 signature authentication for secure POS integration. The SDK handles signature calculation automatically.
+
+### Authentication
+
+```python
+# Email API credentials (required)
+client = kirimel.KiriMel(api_key='sk_test_xxx')
+
+# Loyalty API credentials (optional - only if using loyalty features)
+client = kirimel.KiriMel(
+    api_key='sk_test_xxx',
+    client_key='cli_test_xxx',        # Or KIRIMEL_LOYALTY_CLIENT_KEY env var
+    client_secret='your_secret_here'  # Or KIRIMEL_LOYALTY_CLIENT_SECRET env var
+)
+```
+
+### Customers
+
+```python
+# Register a new customer
+customer = client.loyalty_customers.register({
+    'phone': '+60123456789',
+    'name': 'John Doe',
+    'email': 'john@example.com',
+    'birth_date': '1990-05-15',  # Optional
+    'qr_code': 'CUSTOMER_123'     # Optional
+})
+
+# Look up customer by phone
+customer = client.loyalty_customers.lookup({
+    'phone': '+60123456789'
+})
+
+# Get customer profile
+profile = client.loyalty_customers.get(customer_id)
+
+# Get customer transactions
+transactions = client.loyalty_customers.transactions(customer_id)
+
+# Manually adjust points
+adjustment = client.loyalty_customers.adjust(customer_id, {
+    'points': 50,
+    'reference': 'MANUAL_ADJUST_001',
+    'description': 'Goodwill gesture',
+    'adjusted_by': 'Admin'
+})
+
+# Get customer tier
+tier = client.loyalty_customers.tier(customer_id)
+
+# List customers
+customers = client.loyalty_customers.list({
+    'page': 1,
+    'per_page': 50,
+    'tier': 'gold'
+})
+```
+
+### Points & Wallet
+
+```python
+# Award points
+earn = client.loyalty_points.earn({
+    'customer_id': customer_id,
+    'points': 100,
+    'amount': 50.50,
+    'reference_id': 'ORDER_123',
+    'description': 'Purchase reward'
+})
+
+# Preview redemption (check before confirming)
+preview = client.loyalty_points.preview_redeem({
+    'customer_id': customer_id,
+    'points_to_redeem': 100
+})
+# Returns: points_value, max_redeemable, amount_discount
+
+# Confirm redemption
+redeem = client.loyalty_points.commit_redeem({
+    'customer_id': customer_id,
+    'points_to_redeem': 100,
+    'reference_id': 'BILL_456'
+})
+
+# Reverse transaction (if needed)
+reverse = client.loyalty_points.reverse({
+    'transaction_id': transaction_id,
+    'reason': 'Customer return',
+    'reference_id': 'RETURN_123'
+})
+
+# Get wallet balance
+balance = client.loyalty_wallet.balance({
+    'customer_id': customer_id
+})
+
+# Recalculate balance from ledger
+recalc = client.loyalty_wallet.recalculate({
+    'customer_id': customer_id
+})
+```
+
+### Vouchers
+
+```python
+# Create voucher batch
+batch = client.loyalty_vouchers.create_batch({
+    'name': 'Grand Opening Promo',
+    'type': 'PERCENT',  # or 'FIXED'
+    'value': 10,
+    'quantity': 100,
+    'valid_from': '2024-06-01',
+    'valid_until': '2024-12-31',
+    'min_purchase': 50.00,
+    'max_discount': 25.00
+})
+
+# List voucher batches
+batches = client.loyalty_vouchers.list_batches()
+
+# Issue voucher to customer
+issue = client.loyalty_vouchers.issue({
+    'voucher_batch_id': batch_id,
+    'customer_id': customer_id,
+    'delivered_via': 'email',  # or 'sms'
+    'reference_id': 'PROMO_001'
+})
+
+# Redeem voucher
+redeem = client.loyalty_vouchers.redeem({
+    'code': 'VOUCHER_A1B2C3D4E5F6',
+    'customer_id': customer_id,
+    'purchase_amount': 75.00,
+    'reference_id': 'ORDER_789'
+})
+
+# Get voucher details
+voucher = client.loyalty_vouchers.get('VOUCHER_A1B2C3D4E5F6')
 ```
 
 ## Error Handling
