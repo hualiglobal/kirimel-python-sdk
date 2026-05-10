@@ -6,7 +6,7 @@ import os
 import time
 import logging
 from typing import Optional, Dict, Any, List
-import requests
+import requests  # type: ignore
 
 from .exceptions import (
     ApiException,

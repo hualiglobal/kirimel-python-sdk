@@ -8,8 +8,10 @@ import hmac
 import hashlib
 import json
 import logging
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, cast
 from datetime import datetime, timezone
+
+import requests  # type: ignore
 
 from .exceptions import ApiException, AuthenticationException
 
@@ -26,8 +28,8 @@ class LoyaltyHttpClient:
         retries: int = 3,
     ):
         self.base_url = base_url.rstrip("/")
-        self.client_key = client_key or os.getenv("KIRIMEL_LOYALTY_CLIENT_KEY")
-        self.client_secret = client_secret or os.getenv("KIRIMEL_LOYALTY_CLIENT_SECRET")
+        self.client_key = client_key or os.getenv("KIRIMEL_LOYALTY_CLIENT_KEY") or ""
+        self.client_secret = client_secret or os.getenv("KIRIMEL_LOYALTY_CLIENT_SECRET") or ""
         self.timeout = timeout
         self.retries = retries
 
@@ -117,7 +119,9 @@ class LoyaltyHttpClient:
         """Calculate HMAC SHA256 signature"""
         signing_string = f"{timestamp}.{payload}"
         signature = hmac.new(
-            self.client_secret.encode(), signing_string.encode(), hashlib.sha256
+            self.client_secret.encode(),  # type: ignore[arg-type]
+            signing_string.encode(),
+            hashlib.sha256,
         ).hexdigest()
         return signature
 

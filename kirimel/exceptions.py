@@ -2,11 +2,18 @@
 KiriMel SDK Exception Classes
 """
 
+from typing import Optional, Dict, Any
+
 
 class ApiException(Exception):
     """Base API exception"""
 
-    def __init__(self, message: str, status_code: int = None, errors: dict = None):
+    def __init__(
+        self,
+        message: str,
+        status_code: Optional[int] = None,
+        errors: Optional[Dict[str, Any]] = None,
+    ):
         self.message = message
         self.status_code = status_code
         self.errors = errors
@@ -28,7 +35,11 @@ class RateLimitException(ApiException):
     error_type = "rate_limit_error"
 
     def __init__(
-        self, message: str, status_code: int = None, errors: dict = None, retry_after: int = None
+        self,
+        message: str,
+        status_code: Optional[int] = None,
+        errors: Optional[Dict[str, Any]] = None,
+        retry_after: Optional[int] = None,
     ):
         super().__init__(message, status_code, errors)
         self.retry_after = retry_after
