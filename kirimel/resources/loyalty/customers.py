@@ -33,6 +33,18 @@ class Customers:
         """
         return self._http.post("/api/loyalty/customers/lookup", data)
 
+    def lookup_by_email(self, email: str) -> Dict[str, Any]:
+        """
+        Look up customer by email address
+
+        Args:
+            email: Customer email address
+
+        Returns:
+            Customer data
+        """
+        return self._http.get("/api/loyalty/customers/lookup-by-email", {"email": email})
+
     def get(self, customer_id: str) -> Dict[str, Any]:
         """
         Get customer profile
