@@ -43,8 +43,8 @@ class KiriMel:
         base_url: str = "https://kirimel.com/api",
         timeout: int = 30,
         retries: int = 3,
-        client_key: Optional[str] = None,
-        client_secret: Optional[str] = None,
+        loyalty_api_key: Optional[str] = None,
+        key_secret: Optional[str] = None,
     ):
         """
         Create a new API client
@@ -54,8 +54,8 @@ class KiriMel:
             base_url: Base URL (default: https://kirimel.com/api)
             timeout: Request timeout in seconds (default: 30)
             retries: Number of retries (default: 3)
-            client_key: Loyalty API client key (or use KIRIMEL_LOYALTY_CLIENT_KEY env var)
-            client_secret: Loyalty API client secret (or use KIRIMEL_LOYALTY_CLIENT_SECRET env var)
+            loyalty_api_key: Loyalty API key (or use KIRIMEL_LOYALTY_API_KEY env var)
+            key_secret: Loyalty API key secret (or use KIRIMEL_LOYALTY_KEY_SECRET env var)
         """
         self._http_client = HttpClient(
             api_key=api_key,
@@ -84,8 +84,8 @@ class KiriMel:
 
         # Store credentials for lazy initialization
         self._loyalty_base_url = base_url.replace("/api", "")
-        self._loyalty_client_key = client_key or os.getenv("KIRIMEL_LOYALTY_CLIENT_KEY")
-        self._loyalty_client_secret = client_secret or os.getenv("KIRIMEL_LOYALTY_CLIENT_SECRET")
+        self._loyalty_api_key = loyalty_api_key or os.getenv("KIRIMEL_LOYALTY_API_KEY")
+        self._loyalty_key_secret = key_secret or os.getenv("KIRIMEL_LOYALTY_KEY_SECRET")
         self._loyalty_timeout = timeout
         self._loyalty_retries = retries
 
@@ -93,8 +93,8 @@ class KiriMel:
         """Initialize loyalty HTTP client (lazy initialization)"""
         if self._loyalty_http_client is None:
             self._loyalty_http_client = LoyaltyHttpClient(
-                client_key=self._loyalty_client_key,
-                client_secret=self._loyalty_client_secret,
+                api_key=self._loyalty_api_key,
+                key_secret=self._loyalty_key_secret,
                 base_url=self._loyalty_base_url,
                 timeout=self._loyalty_timeout,
                 retries=self._loyalty_retries,

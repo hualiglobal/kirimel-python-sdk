@@ -496,8 +496,8 @@ client = kirimel.KiriMel(api_key='sk_test_xxx')
 # Loyalty API credentials (optional - only if using loyalty features)
 client = kirimel.KiriMel(
     api_key='sk_test_xxx',
-    client_key='cli_test_xxx',        # Or KIRIMEL_LOYALTY_CLIENT_KEY env var
-    client_secret='your_secret_here'  # Or KIRIMEL_LOYALTY_CLIENT_SECRET env var
+    api_key='cli_test_xxx',        # Or KIRIMEL_LOYALTY_API_KEY env var
+    key_secret='your_secret_here'  # Or KIRIMEL_LOYALTY_KEY_SECRET env var
 )
 ```
 

@@ -21,22 +21,22 @@ class LoyaltyHttpClient:
 
     def __init__(
         self,
-        client_key: Optional[str] = None,
-        client_secret: Optional[str] = None,
+        api_key: Optional[str] = None,
+        key_secret: Optional[str] = None,
         base_url: str = "https://kirimel.com",
         timeout: int = 30,
         retries: int = 3,
     ):
         self.base_url = base_url.rstrip("/")
-        self.client_key = client_key or os.getenv("KIRIMEL_LOYALTY_CLIENT_KEY") or ""
-        self.client_secret = client_secret or os.getenv("KIRIMEL_LOYALTY_CLIENT_SECRET") or ""
+        self.api_key = api_key or os.getenv("KIRIMEL_LOYALTY_API_KEY") or ""
+        self.key_secret = key_secret or os.getenv("KIRIMEL_LOYALTY_KEY_SECRET") or ""
         self.timeout = timeout
         self.retries = retries
 
-        if not self.client_key or not self.client_secret:
+        if not self.api_key or not self.key_secret:
             raise AuthenticationException(
-                "Loyalty API requires both client_key and client_secret. "
-                "Set KIRIMEL_LOYALTY_CLIENT_KEY and KIRIMEL_LOYALTY_CLIENT_SECRET environment variables, "
+                "Loyalty API requires both api_key and key_secret. "
+                "Set KIRIMEL_LOYALTY_API_KEY and KIRIMEL_LOYALTY_KEY_SECRET environment variables, "
                 "or pass them in the config."
             )
 
@@ -86,7 +86,7 @@ class LoyaltyHttpClient:
             "Content-Type": "application/json",
             "Accept": "application/json",
             "User-Agent": "KiriMel-Python-SDK/2.0.0",
-            "X-Client-Key": self.client_key,
+            "X-API-Key": self.api_key,
             "X-Timestamp": timestamp,
             "X-Signature": signature,
         }
@@ -119,7 +119,7 @@ class LoyaltyHttpClient:
         """Calculate HMAC SHA256 signature"""
         signing_string = f"{timestamp}.{payload}"
         signature = hmac.new(
-            self.client_secret.encode(),  # type: ignore[arg-type]
+            self.key_secret.encode(),  # type: ignore[arg-type]
             signing_string.encode(),
             hashlib.sha256,
         ).hexdigest()
