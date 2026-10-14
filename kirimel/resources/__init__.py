@@ -489,6 +489,7 @@ class Email(ResourceClient):
                 - subject: str - Email subject
                 - html: str - HTML content (optional)
                 - text: str - Plain text content (optional)
+                - from_email: str - Verified sender address (optional, per-send override)
                 - from_name: str - From name (optional)
                 - reply_to: str - Reply-to address (optional)
                 - cc: str or list - CC recipients (optional)
